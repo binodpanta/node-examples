@@ -1,4 +1,4 @@
 node-examples
 =============
 
-Examples in Node practice
+Examples for learning/teaching NodeJS
