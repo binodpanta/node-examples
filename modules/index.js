@@ -3,6 +3,8 @@
 // This will load a module I created
 var mymod = require('mymod');
 
-mymod.test();
+exports.mymod = mymod;
 
-mymod.test2();
+//mymod.test();
+
+//mymod.test2();
