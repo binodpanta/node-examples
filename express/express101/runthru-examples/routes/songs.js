@@ -9,6 +9,6 @@ exports.lyrics = function(req, res){
 
 function getLyrics(title) {
 
-	if (title.search('hell')==0) return "Living easy, living free";
+	if (title.search('hell')==0) return "Living easy, living free \nSeason ticket on a one-way ride";
 	return "Not found!";
 }
