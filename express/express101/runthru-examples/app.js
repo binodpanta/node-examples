@@ -6,6 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
+  , songs = require('./routes/songs')
   , http = require('http')
   , path = require('path');
 
@@ -21,6 +22,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
+  // to get a directory listing? This must come after the router middleware
+  app.use(express.directory(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -29,6 +32,13 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+
+// Try a custom route
+// NOTE: HAD TO RESTART THE APP BEFORE THIS TOOK EFFECT!
+//app.get('/highwaytohell',function(req,res) {
+//  res.send("Living easy, living free ... want more?");
+//})
+app.get('/songs/:title?', songs.lyrics);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
