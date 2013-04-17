@@ -1,5 +1,16 @@
 
 
+var songs = {
+    hth : {title: 'Highway To Hell', lyrics: 'Living easy, living free \nSeason ticket on a one-way ride'},
+    doj : {title: 'Drops of Jupiter', lyrics: 'Now that she\'s back in the atmosphere' }
+};
+
+// This Index page is mapped to this
+exports.list = function(req, res){
+    res.render('songs-all', {songs: songs});
+};
+
+
 exports.lyrics = function(req, res){
   //
   if (req.params.title)
