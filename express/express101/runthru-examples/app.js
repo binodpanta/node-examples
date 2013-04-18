@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
-  , songs = require('./routes/songs')
+  , songs = require('./routes/songs') // add a route
   , http = require('http')
   , path = require('path');
 
