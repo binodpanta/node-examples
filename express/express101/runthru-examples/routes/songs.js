@@ -2,7 +2,8 @@
 
 var songs = {
     hth : {title: 'Highway To Hell', lyrics: 'Living easy, living free \nSeason ticket on a one-way ride'},
-    doj : {title: 'Drops of Jupiter', lyrics: 'Now that she\'s back in the atmosphere' }
+    doj : {title: 'Drops of Jupiter', lyrics: 'Now that she\'s back in the atmosphere' },
+    tstk: {title: 'Thunderstruck', lyrics: 'I was caught in the middle of a railroad track' }
 };
 
 // This Index page is mapped to this
@@ -20,6 +21,8 @@ exports.lyrics = function(req, res){
 
 function getLyrics(title) {
 
-	if (title.search('hell')==0) return "Living easy, living free \nSeason ticket on a one-way ride";
+	for (i in songs) {
+     if (songs[i].title === title) return songs[i].lyrics;   
+	}
 	return "Not found!";
 }
