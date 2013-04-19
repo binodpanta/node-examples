@@ -3,6 +3,7 @@ extends layout
 block content
  h3 Full list of songs 
  each item in songs
-  p.btn= item.title
-   pre.prettyprint.linenums= item.lyrics   
+  p.btn
+   a(href='/songs/'+item.title) #{item.title}
+  pre.prettyprint.linenums= item.lyrics   
  
