@@ -30,6 +30,14 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+  // try adding my own middleware that does error handling
+  // Adding this after the standard express errorHandler
+  app.use(function(err,req,res,next) {
+      if (err) {
+          res.status(500);
+      }
+  });
+
 app.get('/', routes.index);
 app.get('/users', user.list);
 
