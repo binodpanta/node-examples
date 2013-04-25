@@ -1,12 +1,26 @@
 extends layout
 
 block content
- h1 Run through examples for Express!
- .btn
-  a(href='/songs') See all songs
+ div.container
+  h1 Run through examples for Express!
+  legend Try some samples
+  section
+   .btn
+    a(href='/songs') See all songs
+   p
+   .btn 
+    a(href='/songs/Highway To Hell') Take the highway to hell!
+   p
+   .btn 
+    a(href='/songs/another one') Try another song!
+
  p
- .btn 
-  a(href='/songs/Highway To Hell') Take the highway to hell!
- p
- .btn 
-  a(href='/songs/another one') Try another song!
+
+ section
+  div.container
+   form.form-inline(method='post')
+    fieldset
+     legend Search for a song
+     input(name='artist',type='text',placeholder='Artist name...')
+     input(name='title',type='text',placeholder='Song ...')
+     button(type='submit').btn Search

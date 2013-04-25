@@ -48,3 +48,21 @@ function getLyrics(title) {
 	}
     return "Not found!";
 }
+
+
+// Demo form handling, search method
+exports.search = function(req, res) {
+    if (req.body.title){    
+    var url = 'http://lyrics.wikia.com/api.php?artist='+req.body.artist+'&song='+req.body.title+'&fmt=json';
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200 && response.body) {
+       res.render('songs', {title: req.body.title, lyrics: (response.body.replace("song = ","")) });
+      } else {
+          res.render('songs', {title: req.body.title, lyrics: getLyrics(req.body.title)});
+      }
+     });
+    
+  }
+      
+  else res.send('index');
+}

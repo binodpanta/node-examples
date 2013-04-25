@@ -58,6 +58,9 @@ app.get('/users', user.list);
 app.get('/songs/:title', songs.lyrics);
 app.get('/songs', songs.list);
 
+// form handling via post
+app.post('/', songs.search);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
