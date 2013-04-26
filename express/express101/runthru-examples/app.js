@@ -8,7 +8,8 @@ var express = require('express')
   , user = require('./routes/user')
   , songs = require('./routes/songs') // add a route
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  ;
 
 var app = express();
 
@@ -52,15 +53,31 @@ app.get('/users', user.list);
 
 // Try a custom route
 // NOTE: HAD TO RESTART THE APP BEFORE THIS TOOK EFFECT!
-//app.get('/highwaytohell',function(req,res) {
-//  res.send("Living easy, living free ... want more?");
-//})
+
+// Lists lyrics for one song
 app.get('/songs/:title', songs.lyrics);
+
+// All songs
 app.get('/songs', songs.list);
 
 // form handling via post
 app.post('/', songs.search);
 
-http.createServer(app).listen(app.get('port'), function(){
+
+// Create the server
+var mainServer = http.createServer(app);
+mainServer.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
+});
+
+
+// Try attaching a socket.io to the server
+// Apparently /socket.io is already available!
+var socketio = require('socket.io').listen(mainServer);
+
+socketio.sockets.on('connection', function (socket) {
+  socket.emit('newsong', { song: 'a song' });
+  socket.on('lyrics', function (data) {
+    console.log('lyrics was ' + data.lyrics);
+  }); // This was crashing, so turning off 
 });
