@@ -1,0 +1,11 @@
+{
+  "name": "mongodb-examples",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node test"
+  },
+  "dependencies": {
+    "optimist": "*"
+  }
+}
