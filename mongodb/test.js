@@ -5,7 +5,6 @@ var argv = require('optimist')
     .demand(['root','find'])
     .argv;
 
-
 // given a comd line input
 // test.js rootlocation regexp
 // finds all files where regexp is found, and stores info about that
@@ -18,13 +17,16 @@ var find = argv.find;
 
 if (!fs.existsSync(root)) throw root + " does not exist";
 
+var finder = require('findit').find(root);
+
 var server = new mongodb.Server('localhost',27017,{auto_reconnect:true});
 
 var db = new mongodb.Db('mydb', server);
 
 // if pat found in file, record number of entries and file path in database
-var insert = function(f, pat) {
-    console.log('searching for ' + pat + ' in ' + f);
+var insert = function(coll, f, pat) {
+    console.log('Found ' + pat + ' in ' + f);
+    coll.insert({file: f, pattern: pat});
 }
 
 db.open(function(err,db) {
@@ -38,15 +40,18 @@ db.open(function(err,db) {
 
 
         // insert some documents
-
-        fs.readdir(root,function(err,files){
-        if(err) throw err;
-        files.forEach(function(file){
-             // insert info about file if found pattern
-             insert(file, find);
+        var finder = require('findit').find(root);
+        //This listens for files found
+        finder.on('file', function (file) {
+               var dotstart = /^\..*/g;
+               if (dotstart.test(file)) return;
+               fs.readFile(file, 'utf8', function(err,data) {
+                          if (data.search(find)>-1){
+                               console.log('Found it in '+ file + '!');
+                               insert(coll, file, find);
+                          }
+               } );               
         });
-        });
- 
     });
 });
 

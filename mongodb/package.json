@@ -6,6 +6,7 @@
     "start": "node test"
   },
   "dependencies": {
-    "optimist": "*"
+    "optimist": "*",
+    "findit": "*"
   }
 }
