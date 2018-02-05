@@ -1,0 +1,21 @@
+{
+  "name": "hubspot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test.js",
+  "dependencies": {
+    "eslint": "^4.17.0",
+    "node-fetch": "^2.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-execute": "^0.2.2",
+    "prettyjson": "^1.2.1"
+  },
+  "scripts": {
+    "test": "./test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
